@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vince Joshua Senon — Data Analyst</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161616'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='600' font-size='13' fill='%23f0f0f0' letter-spacing='-0.5'%3EVS%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ── THEME TOKENS ── */
+  :root {
+    --bg:        #0f0f0f;
+    --surface:   #161616;
+    --surface2:  #1c1c1c;
+    --border:    #222222;
+    --border2:   #2a2a2a;
+    --text:      #d1d1d1;
+    --text-muted:#777777;
+    --text-dim:  #444444;
+    --heading:   #f0f0f0;
+    --tag-bg:    #1a1a1a;
+    --green:     #4ade80;
+    --toggle-bg: #1e1e1e;
+    --shadow:    0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  [data-theme="light"] {
+    --bg:        #f5f5f5;
+    --surface:   #ffffff;
+    --surface2:  #f0f0f0;
+    --border:    #e5e5e5;
+    --border2:   #d8d8d8;
+    --text:      #444444;
+    --text-muted:#777777;
+    --text-dim:  #b0b0b0;
+    --heading:   #111111;
+    --tag-bg:    #f5f5f5;
+    --toggle-bg: #e8e8e8;
+    --shadow:    0 1px 4px rgba(0,0,0,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ── PAGE ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+
+  /* ── TOGGLE BUTTON ── */
+  .theme-toggle {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.5rem;
+    z-index: 100;
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    box-shadow: var(--shadow);
+    transition: background 0.3s, border-color 0.3s, color 0.2s;
+  }
+
+  .theme-toggle:hover { color: var(--heading); border-color: var(--text-dim); }
+
+  .theme-toggle svg { width: 15px; height: 15px; fill: currentColor; }
+
+  .icon-moon { display: block; }
+  .icon-sun  { display: none; }
+
+  [data-theme="light"] .icon-moon { display: none; }
+  [data-theme="light"] .icon-sun  { display: block; }
+
+  /* ── PROFILE ── */
+  .profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.4rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .avatar {
+    width: 76px; height: 76px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--text-dim);
+    overflow: hidden;
+  }
+
+  .avatar svg { fill: var(--text-dim); }
+
+  .profile-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.2rem;
+    transition: color 0.3s;
+  }
+
+  .profile-location {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .profile-title {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .profile-title span { color: var(--text-dim); margin: 0 0.25rem; }
+
+  .profile-actions {
+    display: flex;
+    gap: 0.55rem;
+    margin-top: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.38rem;
+    padding: 0.38rem 0.85rem;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    font-size: 0.73rem;
+    color: var(--text);
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
+  }
+
+  .action-btn:hover {
+    border-color: var(--text-dim);
+    color: var(--heading);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .col-left, .col-right { display: flex; flex-direction: column; gap: 1rem; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+
+  .card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.9rem;
+    transition: color 0.3s;
+  }
+
+  /* stagger cards */
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.10s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.20s; }
+
+  /* ── ABOUT ── */
+  .about-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    transition: color 0.3s;
+  }
+
+  .about-text + .about-text { margin-top: 0.65rem; }
+
+  /* ── SKILLS ── */
+  .skill-group { margin-bottom: 0.85rem; }
+  .skill-group:last-child { margin-bottom: 0; }
+
+  .skill-group-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    transition: color 0.3s;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .tag {
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: var(--tag-bg);
+    transition: all 0.18s;
+    cursor: default;
+  }
+
+  .tag:hover {
+    border-color: var(--text-dim);
+    color: var(--heading);
+    transform: translateY(-1px);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.5rem 0.4rem;
+    margin: 0 -0.4rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 6px;
+    transition: background 0.15s, border-color 0.3s;
+    cursor: default;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+  .exp-item:hover { background: var(--surface2); }
+
+  .exp-dot {
+    width: 7px; height: 7px;
+    background: var(--border2);
+    border: 1px solid var(--text-dim);
+    border-radius: 2px;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+    transition: background 0.3s;
+  }
+
+  .exp-dot.active {
+    background: var(--green);
+    border-color: var(--green);
+    box-shadow: 0 0 7px rgba(74,222,128,0.45);
+  }
+
+  .exp-info { flex: 1; }
+
+  .exp-role {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--heading);
+    transition: color 0.3s;
+  }
+
+  .exp-company { font-size: 0.71rem; color: var(--text-muted); margin-top: 0.06rem; }
+  .exp-year    { font-size: 0.67rem; color: var(--text-dim); flex-shrink: 0; padding-top: 0.05rem; }
+
+  /* ── CERTS ── */
+  .cert-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+
+  .cert-item:last-child { border-bottom: none; }
+  .cert-name   { font-size: 0.8rem; font-weight: 500; color: var(--heading); transition: color 0.3s; }
+  .cert-issuer { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.08rem; transition: color 0.3s; }
+
+  /* ── EDUCATION ── */
+  .edu-degree { font-size: 0.82rem; font-weight: 500; color: var(--heading); transition: color 0.3s; }
+  .edu-school { font-size: 0.73rem; color: var(--text-muted); margin-top: 0.1rem; }
+  .edu-year   { font-size: 0.67rem; color: var(--text-dim); margin-top: 0.08rem; }
+
+  /* ── CONTACT ── */
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    transition: color 0.18s, border-color 0.3s;
+  }
+
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row:hover { color: var(--heading); }
+  .contact-row a { color: inherit; transition: color 0.18s; }
+
+  .contact-label {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.08rem;
+    transition: color 0.3s;
+  }
+
+  .icon { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .project-card:hover {
+    border-color: var(--text-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+
+  .wip-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: #f59e0b;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: 20px;
+    padding: 0.15rem 0.5rem;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .wip-dot {
+    width: 5px; height: 5px;
+    background: #f59e0b;
+    border-radius: 50%;
+    animation: blink 1.6s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  .project-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--heading);
+    margin-bottom: 0.3rem;
+    transition: color 0.3s;
+  }
+
+  .project-desc {
+    font-size: 0.73rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.65rem;
+  }
+
+  .project-tag {
+    font-size: 0.63rem;
+    padding: 0.12rem 0.45rem;
+    border-radius: 3px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    transition: color 0.3s;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-bottom: 2rem;
+    font-size: 0.67rem;
+    color: var(--text-dim);
+    transition: color 0.3s;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .profile { flex-direction: column; }
+    .theme-toggle { top: 1rem; right: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+  <svg class="icon-sun"  viewBox="0 0 24 24"><path d="M12 4.354a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 4.354zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 17.354zm7.25-5.75a.75.75 0 010 1.5h-1.5a.75.75 0 010-1.5h1.5zm-13 0a.75.75 0 010 1.5H4.75a.75.75 0 010-1.5h1.5zm11.03-5.22a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.9 9.9a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm9.9 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 111.06-1.06l1.06 1.06a.75.75 0 010 1.06zm-9.9-9.9a.75.75 0 01-1.06 0L5.32 6.38a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM12 8.354a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z"/></svg>
+</button>
+
+<div class="page">
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <div class="avatar">
+	
+      <!-- <svg viewBox="0 0 24 24" width="38" height="38"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg> -->
+	  
+	  <div class="avatar">
+		<img src="photo.jpg" alt="Vince Joshua Senon" style="width:100%;height:100%;object-fit:cover;" />
+	  </div>
+	  
+    </div>
+    <div class="profile-info">
+      <div class="profile-name">Vince Joshua Senon</div>
+      <div class="profile-location">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Olongapo City, Zambales, Philippines
+      </div>
+      <div class="profile-title">
+        Data Analyst <span>\</span> Financial Researcher <span>\</span> Software Dev Background
+      </div>
+      <div class="profile-actions">
+        <a href="mailto:iamvjsenon@gmail.com" class="action-btn">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Send Email
+        </a>
+        <a href="https://linkedin.com/in/vincesenon" target="_blank" class="action-btn">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H6.5v-7H9v7zM7.7 8.7c-.8 0-1.3-.5-1.3-1.2S6.9 6.3 7.7 6.3s1.3.5 1.3 1.2-.5 1.2-1.3 1.2zM18 17h-2.4v-3.8c0-1-.7-1.2-1-1.2s-1.1.2-1.1 1.2V17h-2.4v-7H13v1c.4-.6 1.1-1 2.1-1 1.8 0 2.9 1.1 2.9 3.4V17z"/></svg>
+          LinkedIn
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="col-left">
+
+      <!-- ABOUT -->
+      <div class="card">
+        <div class="card-title">About</div>
+        <p class="about-text">Results-driven Data Analyst with 3+ years of experience transforming raw data into actionable business insights. Proficient in SQL, Python, Tableau, and Excel, with strong expertise in data cleaning, automation, KPI tracking, and financial research analytics.</p>
+        <p class="about-text">Experienced in identifying trends, improving reporting efficiency, and ensuring high data accuracy across multiple sources. My background in software development enhances my technical problem-solving and cross-functional collaboration.</p>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="card">
+        <div class="card-title">Skills</div>
+        <div class="skill-group">
+          <div class="skill-group-label">Languages & Tools</div>
+          <div class="tags">
+            <span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Tableau</span><span class="tag">Excel</span><span class="tag">Jupyter</span><span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Data & Analytics</div>
+          <div class="tags">
+            <span class="tag">Data Cleaning</span><span class="tag">ETL</span><span class="tag">KPI Tracking</span><span class="tag">Trend Analysis</span><span class="tag">Statistical Analysis</span><span class="tag">Financial Research</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="card">
+        <div class="card-title">Projects</div>
+        <div class="projects-grid">
+
+          <!-- Project placeholders -->
+          <div class="project-card">
+            <div class="wip-badge"><span class="wip-dot"></span> Work in Progress</div>
+            <div class="project-name">Project Name</div>
+            <div class="project-desc">Short description of what this project does and the problem it solves.</div>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">SQL</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="wip-badge"><span class="wip-dot"></span> Work in Progress</div>
+            <div class="project-name">Project Name</div>
+            <div class="project-desc">Short description of what this project does and the problem it solves.</div>
+            <div class="project-tags">
+              <span class="project-tag">Tableau</span>
+              <span class="project-tag">Excel</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="card">
+        <div class="card-title">Certifications</div>
+        <div class="cert-item">
+          <div class="cert-name">Meta Data Analyst Professional Certificate</div>
+          <div class="cert-issuer">Meta · via Coursera · 2026</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">Data Scientist Pathway (Project SPARTA)</div>
+          <div class="cert-issuer">Development Academy of the Philippines · 2023</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-name">Career Service Professional Eligibility</div>
+          <div class="cert-issuer">Civil Service Commission · 2023</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-right">
+
+      <!-- EXPERIENCE -->
+      <div class="card">
+        <div class="card-title">Experience</div>
+        <div class="exp-item">
+          <div class="exp-dot active"></div>
+          <div class="exp-info">
+            <div class="exp-role">Subject Matter Researcher</div>
+            <div class="exp-company">Straive</div>
+          </div>
+          <div class="exp-year">2025</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div class="exp-info">
+            <div class="exp-role">Data Analyst</div>
+            <div class="exp-company">Buwelo</div>
+          </div>
+          <div class="exp-year">2023</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div class="exp-info">
+            <div class="exp-role">App Dev Associate</div>
+            <div class="exp-company">Accenture</div>
+          </div>
+          <div class="exp-year">2021</div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="card">
+        <div class="card-title">Education</div>
+        <div class="edu-degree">BS Electronics Engineering</div>
+        <div class="edu-school">Mondriaan Aura College</div>
+        <div class="edu-year">2015 – 2020</div>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="card">
+        <div class="card-title">Contact</div>
+
+        <div class="contact-row">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <div>
+            <div class="contact-label">Email</div>
+            <a href="mailto:iamvjsenon@gmail.com">iamvjsenon@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H6.5v-7H9v7zM7.7 8.7c-.8 0-1.3-.5-1.3-1.2S6.9 6.3 7.7 6.3s1.3.5 1.3 1.2-.5 1.2-1.3 1.2zM18 17h-2.4v-3.8c0-1-.7-1.2-1-1.2s-1.1.2-1.1 1.2V17h-2.4v-7H13v1c.4-.6 1.1-1 2.1-1 1.8 0 2.9 1.1 2.9 3.4V17z"/></svg>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <a href="https://linkedin.com/in/vincesenon" target="_blank">linkedin.com/in/vincesenon</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <a href="https://vince-senon.github.io/" target="_blank">vince-senon.github.io</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          <div>
+            <div class="contact-label">Phone</div>
+            <a href="tel:+639602562865">+63 960 256 2865</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 Vince Joshua Senon · All rights reserved.</footer>
+
+<script>
+  const toggle = document.getElementById('themeToggle');
+  const html   = document.documentElement;
+
+  // Persist preference
+  const saved = localStorage.getItem('theme');
+  if (saved) html.setAttribute('data-theme', saved);
+
+  toggle.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>
+</body>
+</html>
