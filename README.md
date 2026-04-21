@@ -18,7 +18,7 @@ myPortfolio/
 │   └── resume.pdf          # ← Upload your CV here to enable Download CV button
 │   └── project-forest.jpg  # ← Optional: project thumbnail images
 │   └── project-commute.jpg
-├── photo.JPG               # Your profile photo
+├── photo.JPG               # Profile photo
 └── README.md
 ```
 
