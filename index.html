@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hi, my name is Vince.</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23161616'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='600' font-size='13' fill='%23f0f0f0' letter-spacing='-0.5'%3EVS%3C/text%3E%3C/svg%3E" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23131317'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='600' font-size='13' fill='%23eeeef8' letter-spacing='-0.5'%3EVS%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
@@ -12,10 +12,13 @@
 <body>
 
 <!-- THEME TOGGLE -->
-<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-  <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
-  <svg class="icon-sun"  viewBox="0 0 24 24"><path d="M12 4.354a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 4.354zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 17.354zm7.25-5.75a.75.75 0 010 1.5h-1.5a.75.75 0 010-1.5h1.5zm-13 0a.75.75 0 010 1.5H4.75a.75.75 0 010-1.5h1.5zm11.03-5.22a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.9 9.9a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm9.9 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 111.06-1.06l1.06 1.06a.75.75 0 010 1.06zm-9.9-9.9a.75.75 0 01-1.06 0L5.32 6.38a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM12 8.354a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z"/></svg>
-</button>
+<div class="toggle-wrap">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+    <svg class="icon-sun"  viewBox="0 0 24 24"><path d="M12 4.354a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 4.354zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 17.354zm7.25-5.75a.75.75 0 010 1.5h-1.5a.75.75 0 010-1.5h1.5zm-13 0a.75.75 0 010 1.5H4.75a.75.75 0 010-1.5h1.5zm11.03-5.22a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.9 9.9a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm9.9 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 111.06-1.06l1.06 1.06a.75.75 0 010 1.06zm-9.9-9.9a.75.75 0 01-1.06 0L5.32 6.38a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM12 8.354a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z"/></svg>
+  </button>
+  <div class="toggle-tip" id="toggleTip">Switch to light mode</div>
+</div>
 
 <div class="page">
 
@@ -32,6 +35,10 @@
       </div>
       <div class="profile-title">
         Data Analyst <span>\</span> Financial Researcher <span>\</span> Software Dev Background
+      </div>
+      <div class="avail-pill">
+        <span class="avail-dot"></span>
+        Open to hybrid / remote roles · Willing to relocate
       </div>
       <div class="profile-actions">
         <a href="mailto:iamvjsenon@gmail.com" class="action-btn">
@@ -59,8 +66,9 @@
       <!-- ABOUT -->
       <div class="card">
         <div class="card-title">About</div>
-        <p class="about-text">Results-driven Data Analyst with 3+ years of experience transforming raw data into actionable business insights. Proficient in SQL, Python, Tableau, and Excel, with strong expertise in data cleaning, automation, KPI tracking, and financial research analytics.</p>
-        <p class="about-text">Experienced in identifying trends, improving reporting efficiency, and ensuring high data accuracy across multiple sources. My background in software development enhances my technical problem-solving and cross-functional collaboration.</p>
+        <p class="about-text">I'm a data analyst with <strong>3+ years of experience</strong> turning messy datasets into clear, actionable insights. I genuinely enjoy the process — from wrangling raw data to building dashboards that actually help people make better decisions.</p>
+        <p class="about-text">My background spans <strong>workforce analytics, financial research, and software development</strong>, which means I'm just as comfortable querying a database as I am collaborating with cross-functional teams. I'm proficient in <strong>SQL, Python, Tableau, and Excel</strong>, and I'm always looking for smarter ways to automate the repetitive stuff so I can focus on what matters.</p>
+        <p class="about-text">Currently open to opportunities where data sits at the core — especially roles that value curiosity, clear communication, and a bias toward action.</p>
       </div>
 
       <!-- SKILLS -->
@@ -71,9 +79,8 @@
           <div class="skill-group-label">Languages & Tools</div>
           <div class="tags">
 
-            <!-- SQL -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24" fill="none">
                 <ellipse cx="12" cy="6" rx="8" ry="3" stroke="#4169e1" stroke-width="1.5"/>
                 <path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#4169e1" stroke-width="1.5" fill="none"/>
                 <path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#4169e1" stroke-width="1.5" fill="none"/>
@@ -81,18 +88,16 @@
               SQL
             </span>
 
-            <!-- Python -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24">
                 <path d="M11.914 2C9.076 2 7.4 3.18 7.4 4.914V6.8h4.8v.6H5.486C3.75 7.4 2 8.73 2 11.6c0 2.87 1.75 4.2 3.486 4.2h1.114v-2.014c0-2.1 1.55-3.386 3.514-3.386h4.772c1.65 0 2.914-1.35 2.914-2.914V4.914C17.8 3.18 16.124 2 13.286 2h-1.372zM10.4 4.2c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z" fill="#3776ab"/>
                 <path d="M12.086 22c2.838 0 4.514-1.18 4.514-2.914V17.2h-4.8v-.6h6.714C20.25 16.6 22 15.27 22 12.4c0-2.87-1.75-4.2-3.486-4.2h-1.114v2.014c0 2.1-1.55 3.386-3.514 3.386H9.114C7.464 13.6 6.2 14.95 6.2 16.514v4.572C6.2 22.82 7.876 22 10.714 22h1.372zM13.6 19.8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill="#ffd43b"/>
               </svg>
               Python
             </span>
 
-            <!-- Tableau -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24">
                 <rect x="11" y="2" width="2" height="6" fill="#e97627"/>
                 <rect x="11" y="16" width="2" height="6" fill="#e97627"/>
                 <rect x="2" y="11" width="6" height="2" fill="#e97627"/>
@@ -106,19 +111,16 @@
               Tableau
             </span>
 
-            <!-- Excel -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24">
                 <rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/>
                 <path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/>
-                <rect x="14" y="7" width="6" height="1.5" fill="white" opacity=".0"/>
               </svg>
               Excel
             </span>
 
-            <!-- Jupyter -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="9" fill="none" stroke="#f37626" stroke-width="1.5"/>
                 <circle cx="7" cy="17" r="1.5" fill="#979797"/>
                 <circle cx="17" cy="17" r="1.5" fill="#979797"/>
@@ -128,9 +130,8 @@
               Jupyter
             </span>
 
-            <!-- Git -->
             <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg class="tag-icon" viewBox="0 0 24 24">
                 <path d="M22.27 10.73l-9-9a1.49 1.49 0 00-2.12 0l-1.87 1.87 2.37 2.37a1.77 1.77 0 012.24 2.24l2.29 2.29a1.77 1.77 0 11-1.06 1.06l-2.14-2.14v5.62a1.77 1.77 0 11-1.45 0V9.26a1.77 1.77 0 01-.96-2.32L8.2 4.56l-6.47 6.47a1.49 1.49 0 000 2.12l9 9a1.49 1.49 0 002.12 0l9-9a1.49 1.49 0 00-.58-2.42z" fill="#f05032"/>
               </svg>
               Git
@@ -160,13 +161,11 @@
         <div class="projects-slider">
           <div class="projects-track">
 
-            <!-- ─ PROJECT 1 ─ -->
+            <!-- PROJECT 1 -->
             <div class="project-card">
-
               <div class="project-thumb">
-                <img src="assets/project-commute.jpg" alt="Journey in Focus" />            
+                <img src="assets/project-commute.jpg" alt="Journey in Focus" />
               </div>
-              
               <div class="project-body">
                 <div class="badge-row">
                   <span class="badge badge-wip"><span class="badge-dot"></span> Work in Progress</span>
@@ -174,6 +173,10 @@
                 <div class="project-name">Journey in Focus</div>
                 <div class="project-desc-wrap">
                   <div class="project-desc">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance.</div>
+                  <span class="tooltip-trigger">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    Read more
+                  </span>
                   <div class="project-tooltip">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance.</div>
                 </div>
                 <div class="project-footer">
@@ -181,51 +184,44 @@
                     <span class="project-tag">Tableau</span>
                     <span class="project-tag">Excel</span>
                   </div>
-                  
-                  <!-- <a href="#" target="_blank" class="project-link">
-                    View
-                    <svg viewBox="0 0 24 24"><path d="M14 3v2H5v14h14v-9h2v9c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h9zm5 0h-4V1h6v6h-2V4l-7 7-1.4-1.4L19 3z"/></svg>
-                  </a> -->
-                 
                 </div>
               </div>
             </div>
 
-            <!-- ─ PROJECT 2 ─ -->
-
+            <!-- PROJECT 2 -->
             <div class="project-card">
-
               <div class="project-thumb">
                 <img src="assets/project-forest.jpg" alt="Philippine Forest Cover Analysis" />
               </div>
-
               <div class="project-body">
                 <div class="badge-row">
                   <span class="badge badge-ready"><span class="badge-dot"></span> Available</span>
                 </div>
                 <div class="project-name">Philippine Forest Cover Analysis</div>
                 <div class="project-desc-wrap">
-                  <div class="project-desc">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation — and a look at how the National Greening Program is working to reverse the trend.</div>
+                  <div class="project-desc">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation.</div>
+                  <span class="tooltip-trigger">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    Read more
+                  </span>
                   <div class="project-tooltip">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation — and a look at how the National Greening Program is working to reverse the trend.</div>
                 </div>
                 <div class="project-footer">
                   <div class="project-tags">
-                    <span class="project-tag">Excel</span>                  
+                    <span class="project-tag">Excel</span>
                     <span class="project-tag">Data Analysis</span>
                   </div>
                   <a href="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing" target="_blank" class="project-link">
                     <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                    View
+                    View Project
                   </a>
                 </div>
               </div>
             </div>
 
-            
-          </div><!-- /projects-track -->
-        </div><!-- /projects-slider -->
+          </div>
+        </div>
 
-        <!-- Slider controls -->
         <div class="slider-controls">
           <div id="sliderDots" class="slider-dots"></div>
           <button class="slider-btn" id="sliderPrev" aria-label="Previous">
@@ -235,23 +231,60 @@
             <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
           </button>
         </div>
-
-      </div><!-- /projects card -->
+      </div>
 
       <!-- CERTIFICATIONS -->
       <div class="card">
         <div class="card-title">Certifications</div>
-        <div class="cert-item">
-          <div class="cert-name">Meta Data Analyst Professional Certificate</div>
-          <div class="cert-issuer">Meta · via Coursera · 2026</div>
+
+        <div class="cert-slider-wrap">
+          <div class="cert-track">
+
+            <div class="cert-item">
+              <div class="cert-info">
+                <div class="cert-name">Meta Data Analyst Professional Certificate</div>
+                <div class="cert-issuer">Meta · via Coursera · 2026</div>
+              </div>
+              <a href="https://www.coursera.org" target="_blank" class="cert-btn">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                Credential
+              </a>
+            </div>
+
+            <div class="cert-item">
+              <div class="cert-info">
+                <div class="cert-name">Data Scientist Pathway (Project SPARTA)</div>
+                <div class="cert-issuer">Development Academy of the Philippines · 2023</div>
+              </div>
+              <a href="https://sparta.dap.edu.ph" target="_blank" class="cert-btn">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                Credential
+              </a>
+            </div>
+
+            <div class="cert-item">
+              <div class="cert-info">
+                <div class="cert-name">Career Service Professional Eligibility</div>
+                <div class="cert-issuer">Civil Service Commission · 2023</div>
+              </div>
+              <a href="https://csc.gov.ph" target="_blank" class="cert-btn">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg>
+                Credential
+              </a>
+            </div>
+
+          </div>
         </div>
-        <div class="cert-item">
-          <div class="cert-name">Data Scientist Pathway (Project SPARTA)</div>
-          <div class="cert-issuer">Development Academy of the Philippines · 2023</div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-name">Career Service Professional Eligibility</div>
-          <div class="cert-issuer">Civil Service Commission · 2023</div>
+
+        <div class="cert-controls slider-controls">
+          <span class="cert-counter" id="certDotsCounter">1 / 3</span>
+          <div id="certDots" class="slider-dots"></div>
+          <button class="slider-btn" id="certPrev" aria-label="Previous cert">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <button class="slider-btn" id="certNext" aria-label="Next cert">
+            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </button>
         </div>
       </div>
 
@@ -343,5 +376,16 @@
 <footer>© 2026 Vince Joshua Senon · All rights reserved.</footer>
 
 <script src="js/main.js"></script>
+<script>
+  // Dynamic toggle tooltip text
+  const themeBtn  = document.getElementById('themeToggle');
+  const toggleTip = document.getElementById('toggleTip');
+  function updateTip() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    toggleTip.textContent = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+  }
+  updateTip();
+  themeBtn.addEventListener('click', () => setTimeout(updateTip, 50));
+</script>
 </body>
 </html>

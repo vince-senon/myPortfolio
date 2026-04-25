@@ -12,24 +12,21 @@ toggle.addEventListener('click', () => {
 });
 
 /* ── PROJECT SLIDER ── */
-document.addEventListener('DOMContentLoaded', () => {
-  const track    = document.querySelector('.projects-track');
-  const cards    = document.querySelectorAll('.project-card');
-  const prevBtn  = document.getElementById('sliderPrev');
-  const nextBtn  = document.getElementById('sliderNext');
-  const dotsWrap = document.getElementById('sliderDots');
+function initSlider({ trackSel, cardSel, prevId, nextId, dotsId, visibleFn }) {
+  const track    = document.querySelector(trackSel);
+  const cards    = document.querySelectorAll(cardSel);
+  const prevBtn  = document.getElementById(prevId);
+  const nextBtn  = document.getElementById(nextId);
+  const dotsWrap = document.getElementById(dotsId);
 
   if (!track || cards.length === 0) return;
 
-  // How many cards visible at once
-  const visibleCount = () => window.innerWidth <= 640 ? 1 : 2;
-
   let current = 0;
-
-  // Build dots
-  const totalSlides = () => Math.ceil(cards.length / visibleCount());
+  const visibleCount = visibleFn || (() => 1);
+  const totalSlides  = () => Math.ceil(cards.length / visibleCount());
 
   function buildDots() {
+    if (!dotsWrap) return;
     dotsWrap.innerHTML = '';
     for (let i = 0; i < totalSlides(); i++) {
       const dot = document.createElement('div');
@@ -40,29 +37,55 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateDots() {
-    dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) => {
-      d.classList.toggle('active', i === current);
-    });
+    if (!dotsWrap) return;
+    dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current));
+  }
+
+  function updateCounter() {
+    const el = document.getElementById(dotsId + 'Counter');
+    if (el) el.textContent = `${current + 1} / ${totalSlides()}`;
   }
 
   function goTo(index) {
     const total = totalSlides();
     current = Math.max(0, Math.min(index, total - 1));
-    const cardWidth = cards[0].offsetWidth + 12; // gap = 0.75rem ≈ 12px
+    const gap = 12; // 0.75rem
+    const cardWidth = cards[0].offsetWidth + gap;
     track.style.transform = `translateX(-${current * visibleCount() * cardWidth}px)`;
     updateDots();
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= total - 1;
+    updateCounter();
+    if (prevBtn) prevBtn.disabled = current === 0;
+    if (nextBtn) nextBtn.disabled = current >= total - 1;
   }
 
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
-  window.addEventListener('resize', () => {
-    buildDots();
-    goTo(0);
-  });
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
 
   buildDots();
   goTo(0);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Project slider — 2 visible on desktop
+  initSlider({
+    trackSel:  '.projects-track',
+    cardSel:   '.project-card',
+    prevId:    'sliderPrev',
+    nextId:    'sliderNext',
+    dotsId:    'sliderDots',
+    visibleFn: () => window.innerWidth <= 640 ? 1 : 2,
+  });
+
+  // Cert slider — 3 visible (1 per step)
+  initSlider({
+    trackSel:  '.cert-track',
+    cardSel:   '.cert-item',
+    prevId:    'certPrev',
+    nextId:    'certNext',
+    dotsId:    'certDots',
+    visibleFn: () => 1,
+  });
 });
