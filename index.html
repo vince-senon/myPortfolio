@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Hi, I'm Vince.</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23131317'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='600' font-size='13' fill='%23eeeef8'%3EVS%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23131317'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter,sans-serif' font-weight='600' font-size='13' fill='%23eeeef8'%3EVS%3C/text%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
@@ -20,13 +20,28 @@
   <div class="toggle-tip" id="toggleTip">Switch to light mode</div>
 </div>
 
-<!-- DESCRIPTION MODAL -->
+<!-- GLOBAL TOOLTIP -->
+<div class="g-tooltip" id="gTooltip">
+  <div class="g-tooltip-text" id="gTooltipText"></div>
+  <div class="g-tooltip-arrow" id="gTooltipArrow"></div>
+</div>
+
+<!-- MODAL -->
 <div class="modal-overlay" id="descModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-box">
-    <p class="modal-project-label" id="modalLabel"></p>
+    <div class="modal-header">
+      <span class="modal-badge" id="modalBadge"></span>
+      <button class="modal-x" id="modalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
     <h2 class="modal-title" id="modalTitle"></h2>
     <p class="modal-body" id="modalBody"></p>
-    <button class="modal-close" id="modalClose">Close</button>
+    <div class="modal-meta" id="modalMeta"></div>
+    <a class="modal-link" id="modalLink" target="_blank" style="display:none">
+      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      View Project
+    </a>
   </div>
 </div>
 
@@ -35,21 +50,16 @@
   <!-- PROFILE -->
   <div class="profile">
     <div class="avatar">
-      <img src="photo.JPG" alt="Vince Joshua Senon" />
+      <img src="photo.JPG" alt="Vince Joshua Senon"/>
     </div>
     <div class="profile-info">
       <div class="profile-name">Vince Joshua Senon</div>
       <div class="profile-location">
         <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         Olongapo City, Zambales, PH
-        <span class="avail-pill">
-          <span class="avail-dot"></span>
-          Open for remote &amp; hybrid roles.
-        </span>
+        <span class="avail-pill"><span class="avail-dot"></span>Open for remote &amp; hybrid roles.</span>
       </div>
-      <div class="profile-title">
-        Data Analyst <span>\</span> Financial Researcher <span>\</span> Software Dev Background
-      </div>
+      <div class="profile-title">Data Analyst <span>\</span> Financial Researcher <span>\</span> Software Dev Background</div>
       <div class="profile-actions">
         <a href="mailto:iamvjsenon@gmail.com" class="action-btn">
           <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -67,7 +77,6 @@
     </div>
   </div>
 
-  <!-- GRID -->
   <div class="grid">
     <div class="col-left">
 
@@ -85,30 +94,12 @@
         <div class="skill-group">
           <div class="skill-group-label">Languages &amp; Tools</div>
           <div class="tags">
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#4169e1" stroke-width="1.5"/><path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#4169e1" stroke-width="1.5" fill="none"/><path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#4169e1" stroke-width="1.5" fill="none"/></svg>
-              SQL
-            </span>
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24"><path d="M11.914 2C9.076 2 7.4 3.18 7.4 4.914V6.8h4.8v.6H5.486C3.75 7.4 2 8.73 2 11.6c0 2.87 1.75 4.2 3.486 4.2h1.114v-2.014c0-2.1 1.55-3.386 3.514-3.386h4.772c1.65 0 2.914-1.35 2.914-2.914V4.914C17.8 3.18 16.124 2 13.286 2h-1.372zM10.4 4.2c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z" fill="#3776ab"/><path d="M12.086 22c2.838 0 4.514-1.18 4.514-2.914V17.2h-4.8v-.6h6.714C20.25 16.6 22 15.27 22 12.4c0-2.87-1.75-4.2-3.486-4.2h-1.114v2.014c0 2.1-1.55 3.386-3.514 3.386H9.114C7.464 13.6 6.2 14.95 6.2 16.514v4.572C6.2 22.82 7.876 22 10.714 22h1.372zM13.6 19.8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill="#ffd43b"/></svg>
-              Python
-            </span>
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24"><rect x="11" y="2" width="2" height="6" fill="#e97627"/><rect x="11" y="16" width="2" height="6" fill="#e97627"/><rect x="2" y="11" width="6" height="2" fill="#e97627"/><rect x="16" y="11" width="6" height="2" fill="#e97627"/><rect x="6.5" y="4.5" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="16" y="15" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="4.5" y="16" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="15" y="6.5" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="10.25" y="10.25" width="3.5" height="3.5" fill="#e97627"/></svg>
-              Tableau
-            </span>
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>
-              Excel
-            </span>
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#f37626" stroke-width="1.5"/><circle cx="7" cy="17" r="1.5" fill="#979797"/><circle cx="17" cy="17" r="1.5" fill="#979797"/><circle cx="12" cy="6.5" r="1.5" fill="#979797"/><path d="M9 12.5c0-1.66 1.34-3 3-3s3 1.34 3 3" stroke="#f37626" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
-              Jupyter
-            </span>
-            <span class="tag">
-              <svg class="tag-icon" viewBox="0 0 24 24"><path d="M22.27 10.73l-9-9a1.49 1.49 0 00-2.12 0l-1.87 1.87 2.37 2.37a1.77 1.77 0 012.24 2.24l2.29 2.29a1.77 1.77 0 11-1.06 1.06l-2.14-2.14v5.62a1.77 1.77 0 11-1.45 0V9.26a1.77 1.77 0 01-.96-2.32L8.2 4.56l-6.47 6.47a1.49 1.49 0 000 2.12l9 9a1.49 1.49 0 002.12 0l9-9a1.49 1.49 0 00-.58-2.42z" fill="#f05032"/></svg>
-              Git
-            </span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#4169e1" stroke-width="1.5"/><path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#4169e1" stroke-width="1.5" fill="none"/><path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#4169e1" stroke-width="1.5" fill="none"/></svg>SQL</span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24"><path d="M11.914 2C9.076 2 7.4 3.18 7.4 4.914V6.8h4.8v.6H5.486C3.75 7.4 2 8.73 2 11.6c0 2.87 1.75 4.2 3.486 4.2h1.114v-2.014c0-2.1 1.55-3.386 3.514-3.386h4.772c1.65 0 2.914-1.35 2.914-2.914V4.914C17.8 3.18 16.124 2 13.286 2h-1.372zM10.4 4.2c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z" fill="#3776ab"/><path d="M12.086 22c2.838 0 4.514-1.18 4.514-2.914V17.2h-4.8v-.6h6.714C20.25 16.6 22 15.27 22 12.4c0-2.87-1.75-4.2-3.486-4.2h-1.114v2.014c0 2.1-1.55 3.386-3.514 3.386H9.114C7.464 13.6 6.2 14.95 6.2 16.514v4.572C6.2 22.82 7.876 22 10.714 22h1.372zM13.6 19.8c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z" fill="#ffd43b"/></svg>Python</span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24"><rect x="11" y="2" width="2" height="6" fill="#e97627"/><rect x="11" y="16" width="2" height="6" fill="#e97627"/><rect x="2" y="11" width="6" height="2" fill="#e97627"/><rect x="16" y="11" width="6" height="2" fill="#e97627"/><rect x="6.5" y="4.5" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="16" y="15" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="4.5" y="16" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="15" y="6.5" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="10.25" y="10.25" width="3.5" height="3.5" fill="#e97627"/></svg>Tableau</span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>Excel</span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#f37626" stroke-width="1.5"/><circle cx="7" cy="17" r="1.5" fill="#979797"/><circle cx="17" cy="17" r="1.5" fill="#979797"/><circle cx="12" cy="6.5" r="1.5" fill="#979797"/><path d="M9 12.5c0-1.66 1.34-3 3-3s3 1.34 3 3" stroke="#f37626" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>Jupyter</span>
+            <span class="tag"><svg class="tag-icon" viewBox="0 0 24 24"><path d="M22.27 10.73l-9-9a1.49 1.49 0 00-2.12 0l-1.87 1.87 2.37 2.37a1.77 1.77 0 012.24 2.24l2.29 2.29a1.77 1.77 0 11-1.06 1.06l-2.14-2.14v5.62a1.77 1.77 0 11-1.45 0V9.26a1.77 1.77 0 01-.96-2.32L8.2 4.56l-6.47 6.47a1.49 1.49 0 000 2.12l9 9a1.49 1.49 0 002.12 0l9-9a1.49 1.49 0 00-.58-2.42z" fill="#f05032"/></svg>Git</span>
           </div>
         </div>
         <div class="skill-group">
@@ -131,9 +122,15 @@
           <div class="projects-track">
 
             <!-- PROJECT 1 -->
-            <div class="project-card">
+            <div class="project-card"
+              data-title="Journey in Focus"
+              data-desc="Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance across different regions in the Philippines."
+              data-badge="wip"
+              data-tools="Tableau,Excel"
+              data-source="">
               <div class="project-thumb">
-                <img src="assets/project-commute.jpg" alt="No Image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                <img src="assets/project-commute.jpg" alt="No Image"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
                 <div class="project-thumb-placeholder" style="display:none">
                   <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                   <span>Add project image</span>
@@ -141,27 +138,36 @@
               </div>
               <div class="project-body">
                 <div class="badge-row">
-                  <span class="badge badge-wip"><span class="badge-dot"></span> Work in Progress</span>
+                  <span class="badge badge-wip"><span class="badge-dot"></span>Work in Progress</span>
                 </div>
                 <div class="project-name">Journey in Focus</div>
-                <div class="project-desc-wrap">
-                  <div class="project-desc">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance.</div>
-                  <div class="project-tooltip">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance across different regions in the Philippines.</div>
-                </div>
-                <button class="read-more-btn" data-title="Journey in Focus" data-desc="Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance across different regions in the Philippines.">Read more</button>
+                <div class="project-desc">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance.</div>
                 <div class="project-footer">
-                  <div class="project-tags">
-                    <span class="project-tag">Tableau</span>
-                    <span class="project-tag">Excel</span>
+                  <div class="project-tools">
+                    <span class="project-tool">
+                      <svg viewBox="0 0 24 24"><rect x="11" y="2" width="2" height="6" fill="#e97627"/><rect x="11" y="16" width="2" height="6" fill="#e97627"/><rect x="2" y="11" width="6" height="2" fill="#e97627"/><rect x="16" y="11" width="6" height="2" fill="#e97627"/><rect x="6.5" y="4.5" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="16" y="15" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="4.5" y="16" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="15" y="6.5" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="10.25" y="10.25" width="3.5" height="3.5" fill="#e97627"/></svg>
+                      Tableau
+                    </span>
+                    <span class="project-tool">
+                      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>
+                      Excel
+                    </span>
                   </div>
+                  <button class="read-more-btn">Read more</button>
                 </div>
               </div>
             </div>
 
             <!-- PROJECT 2 -->
-            <div class="project-card">
+            <div class="project-card"
+              data-title="Philippine Forest Cover Analysis"
+              data-desc="Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% attributed to deforestation — and a closer look at how the National Greening Program is working to reverse the trend through reforestation efforts across the country."
+              data-badge="ready"
+              data-tools="Excel,Data Analysis"
+              data-source="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing">
               <div class="project-thumb">
-                <img src="assets/project-forest.jpg" alt="No Image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+                <img src="assets/project-forest.jpg" alt="No Image"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
                 <div class="project-thumb-placeholder" style="display:none">
                   <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
                   <span>Add project image</span>
@@ -169,23 +175,28 @@
               </div>
               <div class="project-body">
                 <div class="badge-row">
-                  <span class="badge badge-ready"><span class="badge-dot"></span> Available</span>
+                  <span class="badge badge-ready"><span class="badge-dot"></span>Available</span>
                 </div>
                 <div class="project-name">Philippine Forest Cover Analysis</div>
-                <div class="project-desc-wrap">
-                  <div class="project-desc">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation.</div>
-                  <div class="project-tooltip">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% attributed to deforestation — and a closer look at how the National Greening Program is working to reverse the trend through reforestation efforts across the country.</div>
-                </div>
-                <button class="read-more-btn" data-title="Philippine Forest Cover Analysis" data-desc="Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% attributed to deforestation — and a closer look at how the National Greening Program is working to reverse the trend through reforestation efforts across the country.">Read more</button>
+                <div class="project-desc">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation.</div>
                 <div class="project-footer">
-                  <div class="project-tags">
-                    <span class="project-tag">Excel</span>
-                    <span class="project-tag">Data Analysis</span>
+                  <div class="project-tools">
+                    <span class="project-tool">
+                      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>
+                      Excel
+                    </span>
+                    <span class="project-tool">
+                      <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#4169e1" stroke-width="1.5"/><path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#4169e1" stroke-width="1.5" fill="none"/><path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#4169e1" stroke-width="1.5" fill="none"/></svg>
+                      Data Analysis
+                    </span>
                   </div>
-                  <a href="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing" target="_blank" class="project-link">
-                    <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                    View Project
-                  </a>
+                  <div class="project-actions">
+                    <button class="read-more-btn">Read more</button>
+                    <a href="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing" target="_blank" class="project-link">
+                      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                      View Project
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,8 +217,8 @@
       <!-- CERTIFICATIONS -->
       <div class="card">
         <div class="card-title">Certifications</div>
-        <div class="cert-slider-wrap">
-          <div class="cert-track">
+        <div class="cert-slider-wrap" id="certWrap">
+          <div class="cert-track" id="certTrack">
 
             <div class="cert-item">
               <div class="cert-info">
@@ -242,10 +253,22 @@
               </a>
             </div>
 
+            <!-- PLACEHOLDER -->
+            <div class="cert-item cert-placeholder">
+              <div class="cert-info">
+                <div class="cert-name">Your Next Certification</div>
+                <div class="cert-issuer">Issuer · Year — coming soon</div>
+              </div>
+              <span class="cert-btn cert-btn-dim">
+                Show credential
+                <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+              </span>
+            </div>
+
           </div>
         </div>
         <div class="cert-controls">
-          <div id="certDots" class="cert-pips"></div>
+          <div class="cert-pips" id="certPips"></div>
           <div class="cert-nav">
             <button class="cert-nav-btn" id="certPrev" aria-label="Previous cert">
               <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
@@ -303,41 +326,27 @@
         <div class="card-title">Contact</div>
         <div class="contact-row">
           <svg class="icon" viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <div>
-            <div class="contact-label">Email</div>
-            <a href="mailto:iamvjsenon@gmail.com">iamvjsenon@gmail.com</a>
-          </div>
+          <div><div class="contact-label">Email</div><a href="mailto:iamvjsenon@gmail.com">iamvjsenon@gmail.com</a></div>
         </div>
         <div class="contact-row">
           <svg class="icon" viewBox="0 0 24 24"><path d="M19 3H5C3.9 3 3 3.9 3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H6.5v-7H9v7zM7.7 8.7c-.8 0-1.3-.5-1.3-1.2S6.9 6.3 7.7 6.3s1.3.5 1.3 1.2-.5 1.2-1.3 1.2zM18 17h-2.4v-3.8c0-1-.7-1.2-1-1.2s-1.1.2-1.1 1.2V17h-2.4v-7H13v1c.4-.6 1.1-1 2.1-1 1.8 0 2.9 1.1 2.9 3.4V17z"/></svg>
-          <div>
-            <div class="contact-label">LinkedIn</div>
-            <a href="https://linkedin.com/in/vincesenon" target="_blank">linkedin.com/in/vincesenon</a>
-          </div>
+          <div><div class="contact-label">LinkedIn</div><a href="https://linkedin.com/in/vincesenon" target="_blank">linkedin.com/in/vincesenon</a></div>
         </div>
         <div class="contact-row">
           <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10z"/></svg>
-          <div>
-            <div class="contact-label">GitHub</div>
-            <a href="https://github.com/vince-senon" target="_blank">github.com/vince-senon</a>
-          </div>
+          <div><div class="contact-label">GitHub</div><a href="https://github.com/vince-senon" target="_blank">github.com/vince-senon</a></div>
         </div>
         <div class="contact-row">
           <svg class="icon" viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-          <div>
-            <div class="contact-label">Phone</div>
-            <a href="tel:+639602562865">+63 960 256 2865</a>
-          </div>
+          <div><div class="contact-label">Phone</div><a href="tel:+639602562865">+63 960 256 2865</a></div>
         </div>
       </div>
 
     </div><!-- /col-right -->
   </div><!-- /grid -->
-
 </div><!-- /page -->
 
 <footer>© 2026 Vince Joshua Senon · All rights reserved.</footer>
-
 <script src="js/main.js"></script>
 </body>
 </html>
