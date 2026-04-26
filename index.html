@@ -15,13 +15,13 @@
 <div class="toggle-wrap">
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
-    <svg class="icon-sun"  viewBox="0 0 24 24"><path d="M12 4.354a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 4.354zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 17.354zm7.25-5.75a.75.75 0 010 1.5h-1.5a.75.75 0 010-1.5h1.5zm-13 0a.75.75 0 010 1.5H4.75a.75.75 0 010-1.5h1.5zm11.03-5.22a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.9 9.9a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm9.9 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 111.06-1.06l1.06 1.06a.75.75 0 010 1.06zm-9.9-9.9a.75.75 0 01-1.06 0L5.32 6.38a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM12 8.354a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z"/></svg>
+    <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 4.354a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 4.354zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0112 17.354zm7.25-5.75a.75.75 0 010 1.5h-1.5a.75.75 0 010-1.5h1.5zm-13 0a.75.75 0 010 1.5H4.75a.75.75 0 010-1.5h1.5zm11.03-5.22a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.9 9.9a.75.75 0 010 1.06l-1.06 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm9.9 1.06a.75.75 0 01-1.06 0l-1.06-1.06a.75.75 0 111.06-1.06l1.06 1.06a.75.75 0 010 1.06zm-9.9-9.9a.75.75 0 01-1.06 0L5.32 6.38a.75.75 0 011.06-1.06l1.06 1.06a.75.75 0 010 1.06zM12 8.354a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5z"/></svg>
   </button>
   <div class="toggle-tip" id="toggleTip">Switch to light mode</div>
 </div>
 
-<!-- GLOBAL TOOLTIP -->
-<div class="g-tooltip" id="gTooltip">
+<!-- GLOBAL TOOLTIP — lives outside all cards, never clipped -->
+<div class="g-tooltip" id="gTooltip" role="tooltip">
   <div class="g-tooltip-text" id="gTooltipText"></div>
   <div class="g-tooltip-arrow" id="gTooltipArrow"></div>
 </div>
@@ -142,18 +142,20 @@
                 </div>
                 <div class="project-name">Journey in Focus</div>
                 <div class="project-desc">Analyzing how Filipinos allocate their time and experience daily commutes. Explores patterns in travel duration, mode of transport, and how commuting habits affect work-life balance.</div>
+                <button class="read-more-btn">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  Read more
+                </button>
                 <div class="project-footer">
                   <div class="project-tools">
-                    <span class="project-tool">
+                    <span class="project-tool" data-tip="Tableau">
                       <svg viewBox="0 0 24 24"><rect x="11" y="2" width="2" height="6" fill="#e97627"/><rect x="11" y="16" width="2" height="6" fill="#e97627"/><rect x="2" y="11" width="6" height="2" fill="#e97627"/><rect x="16" y="11" width="6" height="2" fill="#e97627"/><rect x="6.5" y="4.5" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="16" y="15" width="1.5" height="4.5" fill="#e97627" opacity=".7"/><rect x="4.5" y="16" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="15" y="6.5" width="4.5" height="1.5" fill="#e97627" opacity=".7"/><rect x="10.25" y="10.25" width="3.5" height="3.5" fill="#e97627"/></svg>
-                      Tableau
                     </span>
-                    <span class="project-tool">
+                    <span class="project-tool" data-tip="Excel">
                       <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>
-                      Excel
                     </span>
                   </div>
-                  <button class="read-more-btn">Read more</button>
+                  <!-- No View Project for WIP -->
                 </div>
               </div>
             </div>
@@ -163,7 +165,7 @@
               data-title="Philippine Forest Cover Analysis"
               data-desc="Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% attributed to deforestation — and a closer look at how the National Greening Program is working to reverse the trend through reforestation efforts across the country."
               data-badge="ready"
-              data-tools="Excel,Data Analysis"
+              data-tools="Excel,SQL"
               data-source="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing">
               <div class="project-thumb">
                 <img src="assets/project-forest.jpg" alt="No Image"
@@ -179,24 +181,23 @@
                 </div>
                 <div class="project-name">Philippine Forest Cover Analysis</div>
                 <div class="project-desc">Analyzed DENR and Global Forest Watch data to assess the state of Philippine forests. Key findings include a 1.42M hectare tree cover loss from 2001–2022, with 89% driven by deforestation.</div>
+                <button class="read-more-btn">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                  Read more
+                </button>
                 <div class="project-footer">
                   <div class="project-tools">
-                    <span class="project-tool">
+                    <span class="project-tool" data-tip="Excel">
                       <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2" fill="#217346"/><path d="M8 7l2.5 4L8 15h2l1.5-2.5L13 15h2l-2.5-4L15 7h-2l-1.5 2.5L10 7H8z" fill="white"/></svg>
-                      Excel
                     </span>
-                    <span class="project-tool">
+                    <span class="project-tool" data-tip="SQL">
                       <svg viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="6" rx="8" ry="3" stroke="#4169e1" stroke-width="1.5"/><path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#4169e1" stroke-width="1.5" fill="none"/><path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#4169e1" stroke-width="1.5" fill="none"/></svg>
-                      Data Analysis
                     </span>
                   </div>
-                  <div class="project-actions">
-                    <button class="read-more-btn">Read more</button>
-                    <a href="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing" target="_blank" class="project-link">
-                      <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-                      View Project
-                    </a>
-                  </div>
+                  <a href="https://drive.google.com/drive/folders/1dyJ17qZl1OHsOZdJRB8WsgzqST1qm13s?usp=sharing" target="_blank" class="project-link">
+                    <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                    View Project
+                  </a>
                 </div>
               </div>
             </div>
@@ -253,7 +254,7 @@
               </a>
             </div>
 
-            <!-- PLACEHOLDER -->
+            <!-- PLACEHOLDER — replace with your 4th cert when ready -->
             <div class="cert-item cert-placeholder">
               <div class="cert-info">
                 <div class="cert-name">Your Next Certification</div>

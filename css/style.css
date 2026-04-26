@@ -217,19 +217,22 @@ button { font-family: inherit; cursor: pointer; }
   margin-bottom: .9rem;
 }
 .modal-meta {
-  display: flex; flex-wrap: wrap; gap: .35rem;
+  display: flex; flex-wrap: wrap; gap: .4rem;
   padding-top: .75rem;
   border-top: 1px solid var(--border);
   margin-bottom: .9rem;
 }
 .modal-tool {
-  display: inline-flex; align-items: center; gap: .3rem;
-  font-size: .68rem; color: var(--muted);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
   background: var(--tag-bg);
   border: 1px solid var(--border);
-  border-radius: 5px; padding: .2rem .55rem;
+  border-radius: 6px;
+  transition: border-color .18s, background .18s;
+  cursor: default;
 }
-.modal-tool svg { width: 12px; height: 12px; }
+.modal-tool:hover { border-color: var(--border2); background: var(--surface3); }
+.modal-tool svg { width: 16px; height: 16px; }
 .modal-link {
   display: inline-flex; align-items: center; gap: .4rem;
   font-size: .75rem; font-weight: 500;
@@ -372,15 +375,18 @@ button { font-family: inherit; cursor: pointer; }
 .tag-icon { width: 13px; height: 13px; flex-shrink: 0; }
 
 /* ════════════════════════════════════════
-   EXPERIENCE  — simple dividers, no hover bg
+   EXPERIENCE — with hover background
 ════════════════════════════════════════ */
 .exp-item {
   display: flex; align-items: flex-start; gap: .75rem;
-  padding: .55rem 0;
+  padding: .55rem .45rem; margin: 0 -.45rem;
   border-bottom: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  transition: background .15s;
   cursor: default;
 }
 .exp-item:last-child { border-bottom: none; }
+.exp-item:hover { background: var(--surface2); }
 .exp-dot {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--border2); border: 1.5px solid var(--dim);
@@ -439,8 +445,7 @@ button { font-family: inherit; cursor: pointer; }
   cursor: default;
 }
 .project-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 8px 28px rgba(124,110,245,.15);
+  box-shadow: 0 8px 28px rgba(124,110,245,.15);
 }
 
 .project-thumb {
@@ -484,43 +489,44 @@ button { font-family: inherit; cursor: pointer; }
   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
 }
 
-.project-footer {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: .5rem; margin-top: auto; padding-top: .5rem;
-  flex-wrap: wrap;
-}
-
-/* tools row — icons + label */
-.project-tools { display: flex; flex-wrap: wrap; gap: .35rem; }
-.project-tool {
-  display: inline-flex; align-items: center; gap: .3rem;
-  font-size: .67rem; color: var(--muted);
-  background: var(--tag-bg);
-  border: 1px solid var(--border); border-radius: 5px;
-  padding: .18rem .5rem;
-  transition: color .18s, border-color .18s;
-}
-.project-tool:hover { color: var(--heading); border-color: var(--border2); }
-.project-tool svg { width: 12px; height: 12px; flex-shrink: 0; }
-
-.project-actions {
-  display: flex; align-items: center; gap: .4rem;
-  flex-shrink: 0;
-}
-
+/* read-more sits immediately after desc */
 .read-more-btn {
-  display: inline-flex; align-items: center; gap: .2rem;
+  display: inline-flex; align-items: center; gap: .25rem;
   font-size: .63rem; color: var(--accent);
   background: none; border: none; padding: 0;
+  width: fit-content;
   transition: opacity .15s;
 }
 .read-more-btn:hover { opacity: .7; }
+.read-more-btn svg { width: 11px; height: 11px; fill: currentColor; flex-shrink: 0; }
 
+/* footer: tools left, view-project pinned right */
+.project-footer {
+  display: flex; align-items: center;
+  gap: .5rem; margin-top: auto; padding-top: .6rem;
+}
+
+/* icon-only tools with tooltip via data-tip */
+.project-tools { display: flex; gap: .3rem; align-items: center; flex: 1; }
+.project-tool {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border); border-radius: 6px;
+  transition: border-color .18s, background .18s;
+  flex-shrink: 0;
+  cursor: default;
+}
+.project-tool:hover { border-color: var(--border2); background: var(--surface3); }
+.project-tool svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+/* view project always on right */
 .project-link {
   display: inline-flex; align-items: center; gap: .35rem;
   font-size: .67rem; font-weight: 500; color: #fff;
   background: var(--accent); border: 1px solid var(--accent); border-radius: 6px;
   padding: .3rem .7rem; white-space: nowrap;
+  flex-shrink: 0; margin-left: auto;
   transition: background .18s, transform .18s, box-shadow .18s;
 }
 .project-link:hover {
@@ -553,10 +559,12 @@ button { font-family: inherit; cursor: pointer; }
 }
 .slider-dot.active { background: var(--accent); width: 14px; border-radius: 3px; }
 
-/* ════════════════════════════════════════
-   CERTIFICATIONS — vertical slider
-════════════════════════════════════════ */
-.cert-slider-wrap { overflow: hidden; }
+/* cert wrapper clips to exactly 3 items; JS sets --cert-h after measure */
+.cert-slider-wrap {
+  overflow: hidden;
+  height: calc(var(--cert-h, 56px) * 3);
+  transition: height var(--t);
+}
 .cert-track {
   display: flex; flex-direction: column;
   transition: transform .38s cubic-bezier(.4,0,.2,1);
