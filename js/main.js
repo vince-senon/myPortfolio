@@ -2,11 +2,10 @@
    THEME TOGGLE
 ───────────────────────────────────────── */
 (function () {
-  const html   = document.documentElement;
-  const btn    = document.getElementById('themeToggle');
-  const tip    = document.getElementById('toggleTip');
+  const html = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+  const tip  = document.getElementById('toggleTip');
 
-  // Restore saved preference
   const saved = localStorage.getItem('theme');
   if (saved) html.setAttribute('data-theme', saved);
 
@@ -16,7 +15,6 @@
       ? 'Switch to light mode'
       : 'Switch to dark mode';
   }
-
   updateTip();
 
   btn.addEventListener('click', () => {
@@ -28,76 +26,48 @@
 })();
 
 /* ─────────────────────────────────────────
-   GENERIC SLIDER
-   Works for both projects (horizontal) and
-   certifications (vertical).
+   PROJECT SLIDER (horizontal)
 ───────────────────────────────────────── */
-function createSlider({
-  trackSel,
-  itemSel,
-  prevId,
-  nextId,
-  dotsId,
-  counterId,
-  direction = 'horizontal',
-  visibleFn = () => 1,
-}) {
-  const track    = document.querySelector(trackSel);
-  const items    = document.querySelectorAll(itemSel);
-  const prevBtn  = document.getElementById(prevId);
-  const nextBtn  = document.getElementById(nextId);
-  const dotsWrap = document.getElementById(dotsId);
-  const counter  = document.getElementById(counterId);
+function initProjectSlider() {
+  const track   = document.querySelector('.projects-track');
+  const cards   = Array.from(document.querySelectorAll('.project-card'));
+  const prevBtn = document.getElementById('sliderPrev');
+  const nextBtn = document.getElementById('sliderNext');
+  const dotsEl  = document.getElementById('sliderDots');
 
-  if (!track || !items.length) return;
+  if (!track || !cards.length) return;
 
   let current = 0;
-  const total = () => Math.ceil(items.length / visibleFn());
+  const visible = () => window.innerWidth <= 640 ? 1 : 2;
+  const total   = () => Math.ceil(cards.length / visible());
 
-  /* dots */
   function buildDots() {
-    if (!dotsWrap) return;
-    dotsWrap.innerHTML = '';
+    dotsEl.innerHTML = '';
     for (let i = 0; i < total(); i++) {
       const d = document.createElement('div');
       d.className = 'slider-dot' + (i === current ? ' active' : '');
       d.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(d);
+      dotsEl.appendChild(d);
     }
   }
 
   function syncUI() {
-    /* dots */
-    if (dotsWrap) {
-      dotsWrap.querySelectorAll('.slider-dot').forEach((d, i) =>
-        d.classList.toggle('active', i === current));
-    }
-    /* counter */
-    if (counter) counter.textContent = `${current + 1} / ${items.length}`;
-    /* buttons */
-    if (prevBtn) prevBtn.disabled = current === 0;
-    if (nextBtn) nextBtn.disabled = current >= total() - 1;
+    dotsEl.querySelectorAll('.slider-dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current));
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= total() - 1;
   }
 
   function goTo(idx) {
     current = Math.max(0, Math.min(idx, total() - 1));
-
-    if (direction === 'vertical') {
-      /* cert slider: shift by item height + gap */
-      const itemH = items[0].offsetHeight;
-      track.style.transform = `translateY(-${current * itemH}px)`;
-    } else {
-      /* project slider: shift by card width + gap (12px) */
-      const cardW = items[0].offsetWidth + 12;
-      track.style.transform = `translateX(-${current * visibleFn() * cardW}px)`;
-    }
-
+    const gap = 12;
+    const cardW = cards[0].offsetWidth + gap;
+    track.style.transform = `translateX(-${current * visible() * cardW}px)`;
     syncUI();
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
-  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
-
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
   window.addEventListener('resize', () => { buildDots(); goTo(0); });
 
   buildDots();
@@ -105,12 +75,71 @@ function createSlider({
 }
 
 /* ─────────────────────────────────────────
-   MODAL (project descriptions)
+   CERT SLIDER (vertical, scroll-aware)
+───────────────────────────────────────── */
+function initCertSlider() {
+  const wrap    = document.querySelector('.cert-slider-wrap');
+  const track   = document.querySelector('.cert-track');
+  const items   = Array.from(document.querySelectorAll('.cert-item'));
+  const prevBtn = document.getElementById('certPrev');
+  const nextBtn = document.getElementById('certNext');
+  const pipsEl  = document.getElementById('certDots');
+
+  if (!track || !items.length) return;
+
+  let current = 0;
+  const total = items.length;
+
+  /* build indicator pips */
+  function buildPips() {
+    pipsEl.innerHTML = '';
+    items.forEach((_, i) => {
+      const p = document.createElement('div');
+      p.className = 'cert-pip' + (i === current ? ' active' : '');
+      p.setAttribute('aria-label', `Cert ${i + 1}`);
+      p.addEventListener('click', () => goTo(i));
+      pipsEl.appendChild(p);
+    });
+  }
+
+  function syncUI() {
+    pipsEl.querySelectorAll('.cert-pip').forEach((p, i) =>
+      p.classList.toggle('active', i === current));
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= total - 1;
+  }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, total - 1));
+    const itemH = items[0].offsetHeight;
+    track.style.transform = `translateY(-${current * itemH}px)`;
+    syncUI();
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  /* scroll interaction on the wrapper */
+  let scrollCooldown = false;
+  wrap.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (scrollCooldown) return;
+    scrollCooldown = true;
+    goTo(e.deltaY > 0 ? current + 1 : current - 1);
+    setTimeout(() => { scrollCooldown = false; }, 500);
+  }, { passive: false });
+
+  buildPips();
+  goTo(0);
+}
+
+/* ─────────────────────────────────────────
+   MODAL (Read more)
 ───────────────────────────────────────── */
 function initModal() {
-  const overlay = document.getElementById('descModal');
-  const titleEl = document.getElementById('modalTitle');
-  const bodyEl  = document.getElementById('modalBody');
+  const overlay  = document.getElementById('descModal');
+  const titleEl  = document.getElementById('modalTitle');
+  const bodyEl   = document.getElementById('modalBody');
   const closeBtn = document.getElementById('modalClose');
 
   if (!overlay) return;
@@ -128,19 +157,12 @@ function initModal() {
     document.body.style.overflow = '';
   }
 
-  /* wire up every "Read more" button */
   document.querySelectorAll('.read-more-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      open(btn.dataset.title, btn.dataset.desc);
-    });
+    btn.addEventListener('click', () => open(btn.dataset.title, btn.dataset.desc));
   });
 
   closeBtn.addEventListener('click', close);
-
-  /* close on backdrop click */
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
-
-  /* close on Escape */
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 }
 
@@ -148,29 +170,7 @@ function initModal() {
    INIT
 ───────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* project slider — 2 visible on desktop, 1 on mobile */
-  createSlider({
-    trackSel:  '.projects-track',
-    itemSel:   '.project-card',
-    prevId:    'sliderPrev',
-    nextId:    'sliderNext',
-    dotsId:    'sliderDots',
-    direction: 'horizontal',
-    visibleFn: () => window.innerWidth <= 640 ? 1 : 2,
-  });
-
-  /* certification slider — 1 visible at a time, scrolls vertically */
-  createSlider({
-    trackSel:  '.cert-track',
-    itemSel:   '.cert-item',
-    prevId:    'certPrev',
-    nextId:    'certNext',
-    dotsId:    'certDots',
-    counterId: 'certCounter',
-    direction: 'vertical',
-    visibleFn: () => 1,
-  });
-
+  initProjectSlider();
+  initCertSlider();
   initModal();
 });
