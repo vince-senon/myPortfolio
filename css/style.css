@@ -121,37 +121,42 @@ button { font-family: inherit; cursor: pointer; }
 ════════════════════════════════════════ */
 .g-tooltip {
   position: fixed;
-  z-index: 400;
+  z-index: 700;
   pointer-events: none;
   opacity: 0;
   transition: opacity .15s;
   max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .g-tooltip.visible { opacity: 1; }
 .g-tooltip-text {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: 9px;
-  padding: .75rem .9rem;
-  font-size: .72rem;
-  color: var(--text);
-  line-height: 1.75;
-  box-shadow: 0 12px 32px rgba(0,0,0,.45);
-  word-break: break-word;
-  white-space: normal;
+  background: var(--heading);
+  color: var(--bg);
+  border-radius: 6px;
+  padding: .35rem .7rem;
+  font-size: .7rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+}
+[data-theme="light"] .g-tooltip-text {
+  background: var(--heading);
+  color: var(--surface);
 }
 .g-tooltip-arrow {
-  width: 12px; height: 6px;
-  margin: 0 auto;
-  overflow: hidden;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--heading);
 }
-.g-tooltip-arrow::after {
-  content: '';
-  display: block;
-  width: 10px; height: 10px;
-  background: var(--border2);
-  transform: rotate(45deg) translateX(1px) translateY(-6px);
-  margin: 0 auto;
+.g-tooltip.arrow-below .g-tooltip-arrow {
+  border-top: none;
+  border-bottom: 6px solid var(--heading);
+  order: -1;
 }
 
 /* ════════════════════════════════════════
@@ -381,12 +386,14 @@ button { font-family: inherit; cursor: pointer; }
   display: flex; align-items: flex-start; gap: .75rem;
   padding: .55rem .45rem; margin: 0 -.45rem;
   border-bottom: 1px solid var(--border);
-  border-radius: var(--r-sm);
   transition: background .15s;
   cursor: default;
 }
+.exp-item:hover {
+  border-radius: var(--r-sm);
+  background: var(--surface2);
+}
 .exp-item:last-child { border-bottom: none; }
-.exp-item:hover { background: var(--surface2); }
 .exp-dot {
   width: 8px; height: 8px; border-radius: 50%;
   background: var(--border2); border: 1.5px solid var(--dim);
@@ -445,7 +452,7 @@ button { font-family: inherit; cursor: pointer; }
   cursor: default;
 }
 .project-card:hover {
-  box-shadow: 0 8px 28px rgba(124,110,245,.15);
+  border-color: var(--border2);
 }
 
 .project-thumb {

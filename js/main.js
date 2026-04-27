@@ -65,7 +65,7 @@
     box.style.top  = '0px';
     const bw = box.offsetWidth;
     const bh = box.offsetHeight;
-    const gap = 8;
+    const gap = 6;
     const pad = 6;
 
     let top, showBelow;
@@ -82,7 +82,13 @@
 
     box.style.left = left + 'px';
     box.style.top  = top  + 'px';
-    arrowEl.style.transform = showBelow ? 'rotate(180deg)' : '';
+
+    // arrow direction
+    if (showBelow) {
+      box.classList.add('arrow-below');
+    } else {
+      box.classList.remove('arrow-below');
+    }
   }
 
   // Use delegation on document so it works for dynamically created elements too
@@ -94,12 +100,14 @@
 
   document.addEventListener('mouseout', e => {
     const el = e.target.closest('[data-tip]');
-    if (el) hide();
+    if (!el) return;
+    // Only hide if we're actually leaving the element (not moving to a child)
+    if (!el.contains(e.relatedTarget)) hide();
   });
 
   window.addEventListener('scroll', () => { if (active) reposition(); }, { passive: true });
   window.addEventListener('resize', () => { if (active) reposition(); });
-})();
+})()
 
 /* ════════════════════════════════════════
    MODAL — "Read more" on project cards
@@ -160,6 +168,9 @@
   function closeModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+    // hide any lingering tooltip
+    const tt = document.getElementById('gTooltip');
+    if (tt) tt.classList.remove('visible');
   }
 
   document.querySelectorAll('.read-more-btn').forEach(btn => {
