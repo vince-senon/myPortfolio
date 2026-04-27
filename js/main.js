@@ -107,7 +107,7 @@
 
   window.addEventListener('scroll', () => { if (active) reposition(); }, { passive: true });
   window.addEventListener('resize', () => { if (active) reposition(); });
-})()
+})();
 
 /* ════════════════════════════════════════
    MODAL — "Read more" on project cards
