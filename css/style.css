@@ -329,7 +329,6 @@ button { font-family: inherit; cursor: pointer; }
   padding: 1.25rem;
   box-shadow: var(--sh);
   position: relative;
-  /* NO overflow:hidden here — would clip tooltips */
   transition: background var(--t), border-color var(--t), box-shadow var(--t);
   animation: fadeUp .5s ease both;
 }
@@ -447,7 +446,7 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--surface2);
   flex: 0 0 calc(50% - .375rem);
   display: flex; flex-direction: column;
-  overflow: hidden; /* clip thumb image only, tooltip is outside */
+  overflow: hidden;
   transition: border-color .22s, box-shadow .22s;
   cursor: default;
 }
@@ -590,7 +589,7 @@ button { font-family: inherit; cursor: pointer; }
 .cert-placeholder .cert-name   { color: var(--dim); }
 .cert-placeholder .cert-issuer { color: var(--dim); opacity: .6; }
 
-/* "Show credential" — plain text + external arrow, like LinkedIn */
+/* "Show credential" */
 .cert-btn {
   display: inline-flex; align-items: center; gap: .28rem;
   font-size: .68rem; font-weight: 500; color: var(--muted);
@@ -647,7 +646,7 @@ footer {
 ════════════════════════════════════════ */
 @media (max-width: 720px) {
   .grid { grid-template-columns: 1fr; }
-  .col-right { order: -1; }   /* show sidebar info above content on mobile */
+  .col-right { order: -1; }
   .project-card { flex: 0 0 calc(85vw - 2.5rem); }
 }
 

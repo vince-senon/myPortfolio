@@ -26,8 +26,6 @@
 
 /* ════════════════════════════════════════
    GLOBAL TOOLTIP
-   Attaches to any [data-tip] element.
-   Rendered at body level — never clipped.
 ════════════════════════════════════════ */
 (function () {
   const box      = document.getElementById('gTooltip');
@@ -44,8 +42,7 @@
     if (!text) return;
     textEl.textContent = text;
     active = el;
-    // short delay so it doesn't flicker on fast moves
-    showTimer = setTimeout(() => {
+      showTimer = setTimeout(() => {
       box.classList.add('visible');
       reposition();
     }, 120);
@@ -60,7 +57,6 @@
   function reposition() {
     if (!active) return;
     const rect = active.getBoundingClientRect();
-    // force layout so offsetWidth/Height are accurate
     box.style.left = '0px';
     box.style.top  = '0px';
     const bw = box.offsetWidth;
@@ -91,7 +87,6 @@
     }
   }
 
-  // Use delegation on document so it works for dynamically created elements too
   document.addEventListener('mouseover', e => {
     const el = e.target.closest('[data-tip]');
     if (!el) return;
@@ -101,7 +96,6 @@
   document.addEventListener('mouseout', e => {
     const el = e.target.closest('[data-tip]');
     if (!el) return;
-    // Only hide if we're actually leaving the element (not moving to a child)
     if (!el.contains(e.relatedTarget)) hide();
   });
 
@@ -168,7 +162,6 @@
   function closeModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-    // hide any lingering tooltip
     const tt = document.getElementById('gTooltip');
     if (tt) tt.classList.remove('visible');
   }
@@ -186,7 +179,7 @@
 })();
 
 /* ════════════════════════════════════════
-   SLIDERS — init after DOM + layout ready
+   SLIDERS
 ════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -255,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const total = items.length;
 
     function measure() {
-      // set wrapper height = exactly VISIBLE items
       const h = items[0].offsetHeight;
       wrap.style.height = (h * VISIBLE) + 'px';
       return h;
@@ -307,12 +299,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (Math.abs(d) > 30) goTo(d > 0 ? current + 1 : current - 1);
     }, { passive: true });
 
-    // Wait one frame so layout is complete before measuring
     requestAnimationFrame(() => {
       measure();
       buildPips();
       goTo(0);
-      // re-measure on resize
       window.addEventListener('resize', () => { measure(); goTo(current); });
     });
   })();
