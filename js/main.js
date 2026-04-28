@@ -223,6 +223,14 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
 
+    // Touch swipe
+    let tx0 = 0;
+    track.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const d = tx0 - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 35) goTo(d > 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
     let rt;
     window.addEventListener('resize', () => {
       clearTimeout(rt);
