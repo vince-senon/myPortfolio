@@ -300,35 +300,6 @@ svg  { display: block; }
 }
 @keyframes blink-caret { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* ════════════════════════════════════════
-   HERO TREND LINE
-════════════════════════════════════════ */
-.hero-trend {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 0;
-}
-.trend-line {
-  stroke: var(--accent); stroke-width: 1.5;
-  stroke-linecap: round; stroke-linejoin: round;
-  opacity: .15;
-  stroke-dasharray: 1; stroke-dashoffset: 1;
-  animation: trend-draw 2.8s .4s cubic-bezier(.4,0,.2,1) forwards;
-}
-[data-theme="light"] .trend-line { opacity: .1; }
-.trend-dot {
-  fill: var(--accent); opacity: 0;
-  animation: trend-dot-fade .35s ease forwards;
-}
-.trend-dot:nth-child(1) { animation-delay: .75s; }
-.trend-dot:nth-child(2) { animation-delay: 1.10s; }
-.trend-dot:nth-child(3) { animation-delay: 1.45s; }
-.trend-dot:nth-child(4) { animation-delay: 1.80s; }
-.trend-dot:nth-child(5) { animation-delay: 2.15s; }
-.trend-dot:nth-child(6) { animation-delay: 2.50s; }
-.trend-dot:nth-child(7) { animation-delay: 2.85s; }
-@keyframes trend-draw     { to { stroke-dashoffset: 0; } }
-@keyframes trend-dot-fade { to { opacity: .25; } }
-
 .hero-desc {
   font-size: clamp(.9rem, 2vw, 1rem);
   color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.85;
@@ -872,8 +843,6 @@ svg  { display: block; }
   .scroll-indicator    { animation: none; }
   .hero-inner          { animation: none; opacity: 1; }
   .hero-cursor         { animation: none; }
-  .trend-line          { animation: none; stroke-dashoffset: 0; }
-  .trend-dot           { animation: none; opacity: .2; }
 }
 
 /* ════════════════════════════════════════
