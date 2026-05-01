@@ -813,23 +813,6 @@ svg  { display: block; }
    ANIMATIONS
 ════════════════════════════════════════ */
 /* ════════════════════════════════════════
-   HERO DECO CARDS
-════════════════════════════════════════ */
-.hero-deco { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.deco-card {
-  position: absolute; background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--r); padding: .9rem 1.1rem; box-shadow: var(--sh-lg); min-width: 130px;
-}
-.deco-card--1 { top: 18%; right: 7%; animation: fadeUp .9s .6s ease both, deco-float 5s 1.6s ease-in-out infinite; }
-.deco-card--2 { bottom: 22%; left: 5%; animation: fadeUp .9s .85s ease both, deco-float 4.5s 1.85s ease-in-out infinite; }
-.deco-bars { display: flex; align-items: flex-end; gap: 4px; height: 36px; margin-bottom: .6rem; }
-.deco-bars span { flex: 1; height: var(--h); background: var(--accent); border-radius: 2px 2px 0 0; opacity: .6; min-width: 8px; }
-.deco-bars span:last-child { opacity: 1; }
-.deco-sparkline { width: 80px; height: 36px; display: block; margin-bottom: .5rem; }
-.deco-label { font-size: .65rem; font-weight: 600; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
-@media (max-width: 1024px) { .hero-deco { display: none; } }
-
-/* ════════════════════════════════════════
    TIMELINE SHOW MORE
 ════════════════════════════════════════ */
 .timeline-item.timeline-hidden { display: none; }
@@ -842,11 +825,6 @@ svg  { display: block; }
   transition: border-color var(--t), color var(--t), background var(--t);
 }
 .timeline-show-more:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-d); }
-
-@keyframes deco-float {
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(-8px); }
-}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(22px); }
@@ -865,7 +843,6 @@ svg  { display: block; }
   .scroll-indicator    { animation: none; }
   .hero-inner          { animation: none; opacity: 1; }
   .hero-cursor         { animation: none; }
-  .deco-card           { animation: none; }
 }
 
 /* ════════════════════════════════════════
