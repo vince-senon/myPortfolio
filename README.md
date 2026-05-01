@@ -94,7 +94,7 @@ The filter buttons (`All` / `Available` / `In Progress`) read the `data-status` 
 
 ### Add a Work Experience Entry
 
-Find `<div class="timeline" id="tab-experience">` and add inside `.timeline`:
+Find `<div class="exp-panel" id="tab-work">` and add a `.timeline-item` block inside its `<div class="timeline">` child:
 
 ```html
 <div class="timeline-item fade-in">
@@ -119,7 +119,7 @@ If there are more than 3 entries in a panel, a **Show more** button appears auto
 
 ### Add an Education Entry
 
-Same structure as Work Experience — find `<div id="tab-education">` and add a `.timeline-item` block inside its `.timeline` div.
+Same structure as Work Experience — find `<div class="exp-panel" id="tab-edu">` and add a `.timeline-item` block inside its `<div class="timeline">` child.
 
 ---
 
