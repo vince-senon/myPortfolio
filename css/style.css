@@ -639,6 +639,7 @@ svg  { display: block; }
   font-size: .95rem; font-weight: 700; color: var(--heading); line-height: 1.4;
 }
 .cert-issuer { font-size: .82rem; color: var(--muted); }
+.cert-description { font-size: .82rem; color: var(--muted); margin-top: .25rem; }
 .cert-link {
   display: inline-flex; align-items: center; gap: .35rem;
   font-size: .8rem; font-weight: 600; color: var(--accent);
